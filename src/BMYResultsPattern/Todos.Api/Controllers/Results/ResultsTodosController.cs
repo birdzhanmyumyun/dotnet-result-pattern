@@ -47,6 +47,7 @@ public class ResultsTodosController : ControllerBase
             Result<Todo> result = await _todoService.CreateTodo(request.Title);
             if (result.IsFailure)
             {
+                Console.WriteLine(result.Error);
                 return Problem(result.Error);
             }
             return CreatedAtRoute("GetTodoOrThrow", new { id = result.Value.Id }, result.Value);
